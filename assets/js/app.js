@@ -56,7 +56,7 @@ function renderCircles(circlesGroup, newXScale, chosenXaxis) {
 
   circlesGroup.transition()
     .duration(1000)
-    .attr("cx", d => newXScale(d[chosenXAxis]));
+    .attr("x", d => newXScale(d[chosenXAxis]));
 
   return circlesGroup;
 }
@@ -97,7 +97,7 @@ d3.csv("assets/data/data.csv", function(err, data) {
     // parse data
     data.forEach(function(pollutionData) {
       pollutionData.plastic_waste_generation_kg_day7 = +pollutionData.plastic_waste_generation_kg_day7;
-      pollutionData.coastal_population2 = +pollutionData.coastal_population2;
+      pollutionData.mismanaged_plastic_waste_2010_tonnes7 = +pollutionData.mismanaged_plastic_waste_2010_tonnes7;
       pollutionData.waste_generation_rate_kg_per_person3 = +pollutionData.waste_generation_rate_kg_per_person3;
     });
 
@@ -106,7 +106,7 @@ d3.csv("assets/data/data.csv", function(err, data) {
 
     // Create y scale function
     var yLinearScale = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.coastal_population2)])
+        .domain([0, d3.max(data, d => d.mismanaged_plastic_waste_2010_tonnes7)])
         .range([height, 0]);
 
     // Create initial axis functions
@@ -124,13 +124,14 @@ d3.csv("assets/data/data.csv", function(err, data) {
         .call(leftAxis);
 
     // append initial circles
-    var circlesGroup = chartGroup.selectAll("circle")
+    var circlesGroup = chartGroup.selectAll("rect")
         .data(data)
         .enter()
-        .append("circle")
-        .attr("cx", d => xLinearScale(d[chosenXAxis]))
-        .attr("cy", d => yLinearScale(d.coastal_population2))
-        .attr("r", 4)
+        .append("rect")
+        .attr("x", d => xLinearScale(d[chosenXAxis]))
+        .attr("y", d => yLinearScale(d.mismanaged_plastic_waste_2010_tonnes7))
+        .attr("width", xScale.bandwidth())
+        .attr("height", d => height - yScale(d))
         .attr("fill", "yellowgreen")
         .attr("opacity", ".5");
 
@@ -159,7 +160,7 @@ d3.csv("assets/data/data.csv", function(err, data) {
         .attr("x", 0 - (height))
         .attr("dy", "1em")
         .classed("axis-text", true)
-        .text("Coastal Population Per Country");
+        .text("Mismanaged Plastic Waste 2010 in Tonnes");
 
     // updateToolTip function above csv import
     var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
