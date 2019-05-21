@@ -21,7 +21,7 @@ https://plot.ly/javascript/horizontal-bar-charts/ <br>
 
 • What products make up "plastic waste" – bubble chart 
 
-• Which countries ...
+• 
 
 ## Questions we want to answer: 
 Which countries make, buy, and import plastic?
