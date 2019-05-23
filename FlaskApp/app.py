@@ -10,22 +10,22 @@ from flask import (
     request,
     redirect)
 
-# don't think we need this, but will check
-# import sqlalchemy
-# from sqlalchemy.ext.automap import automap_base
-# from sqlalchemy.orm import Session
-# from sqlalchemy import create_engine
 
-#
-# country_geocode=Base.classes.country_geocode
-# country_plastic_waste=Base.classes.country_plastic
-# country_waste_info=Base.classes.country_waste_info
-# master=Base.classes.master
-# mismanaged_plastic_pperson=Base.classes.mismanaged_plastic_pperson
-# mismanaged_pwaste_2010_to_2025=Base.classes.mismanaged_pwaste_2010_to_2025
-# plastic_waste_percentage=Base.classes.plastic_waste_percentage
-# pperson_plastic_waste=Base.classes.pperson_plastic_waste
-# waste_types=Base.classes.pperson_plastic_waste
+import sqlalchemy
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine
+
+
+country_geocode=Base.classes.country_geocode
+country_plastic_waste=Base.classes.country_plastic
+country_waste_info=Base.classes.country_waste_info
+master=Base.classes.master
+mismanaged_plastic_pperson=Base.classes.mismanaged_plastic_pperson
+mismanaged_pwaste_2010_to_2025=Base.classes.mismanaged_pwaste_2010_to_2025
+plastic_waste_percentage=Base.classes.plastic_waste_percentage
+pperson_plastic_waste=Base.classes.pperson_plastic_waste
+waste_types=Base.classes.pperson_plastic_waste
 
 
 # 2. Create an app
