@@ -10,7 +10,7 @@ import datetime as dt
 from flask import Flask, jsonify
 
 # Create our session (link) from Python to the DB
-engine = create_engine("sqlite:///Resources/hawaii.sqlite")
+engine = create_engine("sqlite:///db/plasticWaste.sqlite")
 session = Session(engine)
 
 # Reflect Database into ORM classes
@@ -18,8 +18,18 @@ Base = automap_base()
 Base.prepare(engine, reflect=True)
 
 # Save references to each table
-Measurement = Base.classes.measurement
-Station = Base.classes.station
+
+country_geocode=Base.classes.country_geocode
+country_plastic_waste=Base.classes.country_plastic
+country_waste_info=Base.classes.country_waste_info
+master=Base.classes.master
+mismanaged_plastic_pperson=Base.classes.mismanaged_plastic_pperson
+mismanaged_pwaste_2010_to_2025=Base.classes.mismanaged_pwaste_2010_to_2025
+plastic_waste_percentage=Base.classes.plastic_waste_percentage
+pperson_plastic_waste=Base.classes.pperson_plastic_waste
+waste_types=Base.classes.pperson_plastic_waste
+
+
 
 # 2. Create an app
 app = Flask(__name__)
@@ -31,12 +41,12 @@ def index():
     print (
         f"Plastic Planet Navigation<br/>"
         f"Available Routes:<br/>"
+        f"Available Routes:<br/>"
         f"/us-plastic-lifecycle<br/>"
         f"/population-vs-waste-management<br/>"
         f"/countries-mismatched-waste"
     )
 
-prev_year = dt.date(2017,8,23) - dt.timedelta(365)
 
 @app.route("/us-plastic-lifecycle")
 def precipitation():
