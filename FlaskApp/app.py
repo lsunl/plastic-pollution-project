@@ -10,13 +10,27 @@ from flask import (
     request,
     redirect)
 
-
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 
 
+# 2. Create an app
+app = Flask(__name__)
+
+
+# 3. Database setup
+from flask_sqlalchemy import SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("sqlite:///db/plasticWaste.sqlite")
+db = SQLAlchemy(app)
+
+# Reflect existing database into a new model
+Base = automap_base()
+# Reflect the tables
+Base.prepare(db.engine, reflect=True)
+
+# Save references
 country_geocode=Base.classes.country_geocode
 country_plastic_waste=Base.classes.country_plastic
 country_waste_info=Base.classes.country_waste_info
@@ -28,14 +42,6 @@ pperson_plastic_waste=Base.classes.pperson_plastic_waste
 waste_types=Base.classes.pperson_plastic_waste
 
 
-# 2. Create an app
-app = Flask(__name__)
-
-
-# 3. Database setup
-from flask_sqlalchemy import SQLAlchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("sqlite:///db/plasticWaste.sqlite")
-db = SQLAlchemy(app)
 
 # 4. Define static routes
 @app.route("/")
