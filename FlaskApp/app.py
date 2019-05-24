@@ -21,7 +21,7 @@ from sqlalchemy import create_engine, func
 #################################################
 # Database Setup
 #################################################
-engine = create_engine("sqlite:///resources/plasticWaste.sqlite", echo=False)
+engine = create_engine("sqlite:///resources/plastichorror.sqlite", echo=False)
 conn = engine.connect()
 
 
@@ -31,15 +31,18 @@ Base = automap_base()
 Base.prepare(engine, reflect=True)
 
 
-# # Save references to each table
+# Reference to EPA route
 epa_waste = Base.classes.epa_waste
 # country_geocode=Base.classes.country_geocode
-# country_plastic_waste=Base.classes.country_plastic_waste
+
+# Reference to GLOBAL WASTE route
+country_plastic_waste=Base.classes.country_plastic_waste
 # country_waste_info=Base.classes.country_waste_info
-# mismanaged_plastic_pperson=Base.classes.mismanaged_plastic_pperson
-# mismanaged_pwaste_2010_to_2025=Base.classes.mismanaged_pwaste_2010_to_2025
 # plastic_waste_percentage=Base.classes.plastic_waste_percentage
 # pperson_plastic_waste=Base.classes.pperson_plastic_waste
+
+# Reference to PREDICTIONS route
+mismanaged_prediction=Base.classes.mismanaged_prediction
 
 session = Session(bind=engine)
 
@@ -58,14 +61,14 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/api/epa_waste")
+@app.route("/api/epa-waste")
 def example():
     results = session.query(epa_waste).all()
     #unravel_string = list(np.ravel(results))
     all = []
     for x in results:
         x_dict = {}
-        x_dict["epa_id"] = x.epa_id
+        # x_dict["epa_id"] = x.epa_id
         x_dict["year"] = x.year
         x_dict["paper_paperboard"] = x.paper_paperboard
         x_dict["glass"] = x.glass
@@ -78,31 +81,37 @@ def example():
 
     return jsonify(all)
 
-# @app.route("/api/global-waste")
-# def global_waste():
-#     results = session.query(country_plastic_waste, country_waste_info).all()
-#     all = []
-#     for x in results:
-#         x_dict = {}
-#         x_dict["Country"] = x.Country
-#         # x_dict["year"] = x["Plastic_waste_generation_kg/day"]
-#         x_dict["Economic_status"] = x.Economic_status
-#         x_dict["Coastal_population"] = x.Coastal_population
-#         all.append(x_dict)
-#
-#     return jsonify(all)
+@app.route("/api/global-waste")
+def global_waste():
+    results = session.query(country_plastic_waste).all()
+    all = []
+    for x in results:
+        x_dict = {}
+        x_dict["country_id"] = x.country_id
+        x_dict["Country"] = x.Country
+        x_dict["Plastic_waste_generation_kg_day"] = x.Plastic_waste_generation_kg_day
+        x_dict["Managed_plastic_waste_kg_day"] = x.Managed_plastic_waste_kg_day
+        x_dict["Mismanaged_plastic_waste_kg_day"] = x.Mismanaged_plastic_waste_kg_day
+        all.append(x_dict)
+
+    return jsonify(all)
+
+@app.route("/api/projections")
+def projections():
+    results = session.query(mismanaged_prediction).all()
+    all = []
+    for x in results:
+        x_dict = {}
+        x_dict["country_id"] = x.country_id
+        x_dict["Country"] = x.Country
+        x_dict["Mismanaged_plastic_waste_in_2010_tonnes"] = x.Mismanaged_plastic_waste_in_2010_tonnes
+        x_dict["Mismanaged_plastic_waste_in_2025_tonnes"] = x.Mismanaged_plastic_waste_in_2025_tonnes
+        x_dict["Per_Change_2010_to_2025"] = x.Per_Change_2010_to_2025
+        all.append(x_dict)
+
+    return jsonify(all)
 
 
-# @app.route("/api")
-# def api_list():
-#     """list all API routes"""
-#     print (
-#         f"Plastic Planet Navigation<br/>"
-#         f"Available Routes:<br/>"
-#         f"/global-waste<br/>"
-#         f"/population-vs-waste-management<br/>"
-#         f"/countries-mismatched-waste"
-#     )
 
 
 # 4. Define main behavior
