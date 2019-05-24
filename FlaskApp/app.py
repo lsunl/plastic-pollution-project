@@ -33,13 +33,13 @@ Base.prepare(engine, reflect=True)
 
 # # Save references to each table
 epa_waste = Base.classes.epa_waste
-country_geocode=Base.classes.country_geocode
-country_plastic_waste=Base.classes.country_plastic_waste
-country_waste_info=Base.classes.country_waste_info
-mismanaged_plastic_pperson=Base.classes.mismanaged_plastic_pperson
-mismanaged_pwaste_2010_to_2025=Base.classes.mismanaged_pwaste_2010_to_2025
-plastic_waste_percentage=Base.classes.plastic_waste_percentage
-pperson_plastic_waste=Base.classes.pperson_plastic_waste
+# country_geocode=Base.classes.country_geocode
+# country_plastic_waste=Base.classes.country_plastic_waste
+# country_waste_info=Base.classes.country_waste_info
+# mismanaged_plastic_pperson=Base.classes.mismanaged_plastic_pperson
+# mismanaged_pwaste_2010_to_2025=Base.classes.mismanaged_pwaste_2010_to_2025
+# plastic_waste_percentage=Base.classes.plastic_waste_percentage
+# pperson_plastic_waste=Base.classes.pperson_plastic_waste
 
 session = Session(bind=engine)
 
@@ -78,11 +78,19 @@ def example():
 
     return jsonify(all)
 
-@app.route("/api/global-waste")
-def global_waste():
-    results = session.query(country_plastic_waste).all()
-    all = []
-
+# @app.route("/api/global-waste")
+# def global_waste():
+#     results = session.query(country_plastic_waste, country_waste_info).all()
+#     all = []
+#     for x in results:
+#         x_dict = {}
+#         x_dict["Country"] = x.Country
+#         # x_dict["year"] = x["Plastic_waste_generation_kg/day"]
+#         x_dict["Economic_status"] = x.Economic_status
+#         x_dict["Coastal_population"] = x.Coastal_population
+#         all.append(x_dict)
+#
+#     return jsonify(all)
 
 
 # @app.route("/api")
