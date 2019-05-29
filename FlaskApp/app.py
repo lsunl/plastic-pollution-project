@@ -37,15 +37,15 @@ Base = automap_base()
 Base.prepare(engine, reflect=True)
 
 # DB Version 1 references
-# epa = Base.classes.epa
+epa = Base.classes.epa
 # global_waste = Base.classes.global_waste
 # trades = Base.classes.trades
 # treatment_types = Base.classes.treatment_types
 # countries = Base.classes.countries
 
 # DB Version 2 references
-countries = Base.classes.countries
-epa = Base.classes.epa
+# countries = Base.classes.countries
+# epa = Base.classes.epa
 
 
 # DB Version 2 references
@@ -60,7 +60,7 @@ app = Flask(__name__)
 
 
 #################################################
-# Routes
+# HTML ROUTES
 #################################################
 @app.route("/")
 def index():
@@ -68,7 +68,15 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/epa")
+def epa_index():
+    """ epa stacked bar chart page """
+    return render_template("epa.html")
 
+
+#################################################
+# DATA ROUTES
+#################################################
 @app.route("/api/epa-waste")
 def example():
     results = session.query(epa).all()
@@ -79,6 +87,7 @@ def example():
         # x_dict["epa_id"] = x.epa_id
         x_dict["year"] = x.year
         x_dict["tons"] = x.values
+        x_dict["treatment_type"] = x.treatment_type
         x_dict["waste_material"] = x.waste_material
         all.append(x_dict)
     return jsonify(all)
