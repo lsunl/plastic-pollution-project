@@ -2,7 +2,7 @@
 We've analyzed and visualized the flow of plastic pollution at a global level using HTML/CSS, Python & Flask and SQLite.
 
 ## Requirements
-This application requires Python 3.6
+This application requires Python 3.6 and FLASK to be already installed
 
 ## Access the project
 1. Clone this repo
