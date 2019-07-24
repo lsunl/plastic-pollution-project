@@ -1,41 +1,27 @@
-# plastic-pollution-project
+# world wide waste
+We've analyzed and visualized the flow of plastic pollution at a global level using HTML/CSS, Python & Flask and SQLite.
 
-## Project Goals:
+## Requirements
+This application requires Python 3.6
 
-Illustrate how frequently consumers use plastic
-Identify the toxic chemicals used to create plastic products
-Look at plastic production, distribution, waste, recycled waste, mismanaged waste
-Visualize the plastic industry’s fiscal value, manufacturing locations, and distribution 
-Visualize countries that demand high frequency of single-use plastic products
-Visualize where plastic waste accumulates by size and weight
+## Access the project
+1. Clone this repo
+2. Launch the application with
+```
+FLASK_APP=app.py flask run
+```
 
-## Value:
-Gain insight on the movement of plastic to bring awareness on the issue
+or 
 
-## Desired Vizes:
-• How Much Plastic Constitutes to Overall Waste Per Country? – basic sunburst chart<br>
-https://plot.ly/javascript/horizontal-bar-charts/ <br>
+```
+python app.py
+```
 
-• Imports & Exports of Plastics – colored horizontal bar chart<br>
-https://plot.ly/javascript/horizontal-bar-charts/ <br>
 
-• What products make up "plastic waste" – bubble chart 
 
-• 
 
-## Questions we want to answer: 
-Which countries make, buy, and import plastic?
-Where is new plastic sold to?
-Which products are made with plastic?
-How much does global waste contribute to climate change?
-
-How are plastics being used?
-What is the lifespan of plastic?
-Where does plastic waste go?
-
-Which countries buy the most plastic?
-How much of it gets recycled?
-How is plastic waste disrupting the environment?
+## Project Goal:
+Visualize plastic production, distribution, waste, recycled waste, mismanaged waste of countries
 
 
 ## Reference for Data on Plastic Waste
@@ -101,39 +87,3 @@ https://news.nationalgeographic.com/2017/07/plastic-produced-recycling-waste-oce
 •https://hub.arcgis.com/datasets/uneplive::estimate-of-plastic-pollution-in-the-worlds-oceans
 https://ourworldindata.org/plastic-pollution#data-sources
 https://catalog.data.gov/dataset/materials-discarded-in-the-u-s-municipal-waste-stream-1960-to-2009-in-tons
-
-
-## Project requirements:
-Your visualization must include a Python Flask–powered RESTful API, HTML/CSS, JavaScript, and at least one database (SQL, MongoDB, SQLite, etc.). 
-Your project should fall into one of the below four tracks:
-A custom “creative” D3.js project (i.e., a nonstandard graph or chart)
-A combination of web scraping and Leaflet or Plotly
-A dashboard page with multiple charts that update from the same data
-A “thick” server that performs multiple manipulations on data in a database prior to visualization (must be approved)
-Your project should include at least one JS library that we did not cover.
-Your project must be powered by a data set with at least 100 records.
-Your project must include some level of user-driven interaction
-(e.g., menus, dropdowns, textboxes)
-Your final visualization should ideally include at least three views.
-
-
-
-
-### POTENTIAL VISUALIZATIONS (upon first assumption)
-(relevant once we find our data sources)
-1. User Prompt: “Which single-use plastic do you use the most on a weekly basis?”
-https://www.waterdocs.ca/water-talk/2017/12/19/8-single-use-plastic-items-you-can-quit-right-now
-plastic straws • plastic water bottles • coffee cups with lids • plastic bags • take-out containers • plastic wrap • plastic cutlery • plastic party cups • six pack rings
-
-Visualize the most commonly used plastics
-Dendrogram + Grouped Horizontal Bar Chart? https://bl.ocks.org/dahis39/f28369f0b17b456ac2f1fa9b937c5002
-
-Comparing top 10 plastics by volume of consumption versus production per day/year
-Multi-series line chart https://observablehq.com/@d3/multi-line-chart
-
-Comparing plastic volume that actually gets recycled vs volume dumped into the environment 
-Bar chart
-
-Most waste producing countries and most polluted countries 
-Heatmap
-
